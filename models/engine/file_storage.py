@@ -13,13 +13,11 @@ from models.place import Place
 
 class FileStorage():
     """
-    FileStorage class,
+    FileStorage class attributes,
     """
-    # Class attributes
     __file_path = "file.json"
     __objects = {}
 
-    # Public instance methods
     def all(self):
         """
         Returns our dictionary __objects.
