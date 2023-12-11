@@ -1,26 +1,43 @@
 #!/usr/bin/python3
 """Module for the entry point of the command interpreter."""
-
+import models
 import json
 import cmd
+from models import storage
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
 from models import storage
 import re
 
 
 class HBNBCommand(cmd.Cmd):
 
-    """Class for the command interpreter."""
+    """Class for command line interpreter"""
 
     prompt = "(hbnb) "
+    __classes = [
+        "BaseModel",
+        "User",
+        "Amenity",
+        "Storage",
+        "State",
+        "City",
+        "Review",
+        "Place",
+    ]
 
     def default(self, line):
-        """Catch commands if nothing else matches then."""
+        """Handles commands if nothing else matches them"""
         # print("DEF:::", line)
         self._precmd(line)
 
     def _precmd(self, line):
-        """Intercepts commands to test for class.syntax()"""
+        """Handles commands to test for class.syntax()"""
         # print("PRECMD:::", line)
         match = re.search(r"^(\w*)\.(\w+)(?:\(([^)]*)\))$", line)
         if not match:
@@ -89,17 +106,19 @@ class HBNBCommand(cmd.Cmd):
         """
         pass
 
-    def do_create(self, line):
-        """Creates an instance.
+    def do_create(self, args):
+        """Creates new instance of BaseModel, save, prints, the id.
+           Usage: create <class name>
         """
-        if line == "" or line is None:
+        args = args.split()
+        if len(args) == 0:
             print("** class name missing **")
-        elif line not in storage.classes():
+        elif args[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         else:
-            b = storage.classes()[line]()
-            b.save()
-            print(b.id)
+            new_creation = eval(args[0] + '()')
+            models.storage.save()
+            print(new_creation.id)
 
     def do_show(self, line):
         """Prints the string representation of an instance.
