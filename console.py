@@ -30,11 +30,6 @@ class HBNBCommand(cmd.Cmd):
         "User"
     ]
 
-    def default(self, line):
-        """with holds commands if nothing else matches it,"""
-        # print("DEF:::", line)
-        self._precmd(line)
-
     def _precmd(self, line):
         """Intercepting commands to test for class.syntax()"""
         # print("PRECMD:::", line)
@@ -159,7 +154,7 @@ class HBNBCommand(cmd.Cmd):
         """
         if line != "":
             words = line.split(' ')
-            if words[0] not in storage.classes():
+            if words[0] not in storage.all():
                 print("** class doesn't exist **")
             else:
                 nl = [str(obj) for key, obj in storage.all().items()
@@ -175,7 +170,7 @@ class HBNBCommand(cmd.Cmd):
         words = line.split(' ')
         if not words[0]:
             print("** class name missing **")
-        elif words[0] not in storage.classes():
+        elif words[0] not in storage.all():
             print("** class doesn't exist **")
         else:
             matches = [
@@ -198,7 +193,7 @@ class HBNBCommand(cmd.Cmd):
         value = match.group(4)
         if not match:
             print("** class name missing **")
-        elif classname not in storage.classes():
+        elif classname not in storage.all():
             print("** class doesn't exist **")
         elif uid is None:
             print("** instance id missing **")
@@ -229,6 +224,11 @@ class HBNBCommand(cmd.Cmd):
                         pass
                 setattr(storage.all()[key], attribute, value)
                 storage.all()[key].save()
+
+    def default(self, line):
+        """with holds commands if nothing else matches it,"""
+        # print("DEF:::", line)
+        self._precmd(line)
 
 
 if __name__ == '__main__':
