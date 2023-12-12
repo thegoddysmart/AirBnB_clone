@@ -38,8 +38,7 @@ class BaseModel:
 
     def __str__(self):
         """Returns official string representation"""
-
-        claname = self.__class__.__name__
+        claname = type(self).__name__
         return "[{}] ({}) {}".format(claname, self.id, self.to_dict())
 
     def save(self):
