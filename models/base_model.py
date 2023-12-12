@@ -3,7 +3,7 @@
 
 import uuid
 from datetime import datetime
-from models import engine
+from models import storage
 
 
 class BaseModel:
@@ -18,7 +18,6 @@ class BaseModel:
             - *args: list of arguments.
             - **kwargs: dictionary of key-values arguments.
         """
-        from models import storage
 
         if kwargs is not None and kwargs != {}:
             for value in kwargs:
@@ -44,7 +43,6 @@ class BaseModel:
 
     def save(self):
         """Updates updated_at attribute with current datetime"""
-        from models import storage
 
         self.updated_at = datetime.now()
         storage.save()
