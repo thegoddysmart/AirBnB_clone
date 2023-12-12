@@ -9,7 +9,6 @@ import models
 from models.city import City
 from datetime import datetime
 import time
-import json
 
 
 class TestCityInstantiation(unittest.TestCase):
@@ -69,7 +68,7 @@ class TestCityInstantiation(unittest.TestCase):
 
     def test_instantiation_with_no_kwargs(self):
         with self.assertRaises(TypeError):
-            City(id="None", created_at="None", updated_at="None")
+            City(id=None, created_at=None, updated_at=None)
 
 
 if __name__ == "__main__":

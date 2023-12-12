@@ -12,7 +12,6 @@ import models
 from models.base_model import BaseModel
 from datetime import datetime
 import os
-import json
 import time
 
 
@@ -99,7 +98,7 @@ class TestBaseModelSave(unittest.TestCase):
         """Test if calling save updates the updated_at attribute."""
         model = BaseModel()
         original_updated_at = model.updated_at
-        time.sleep(0.1) # adding a delay to ensure updated_at will be different
+        time.sleep(0.1)  # adding a delay
         model.save()
         self.assertNotEqual(original_updated_at, model.updated_at)
 
@@ -109,7 +108,7 @@ class TestBaseModelSave(unittest.TestCase):
         model.save()
         with open("file.json", "r") as file:
             content = file.read()
-            self.assertIn(model.id, content)        
+            self.assertIn(model.id, content)
 
 
 class TestBaseModelToDict(unittest.TestCase):
