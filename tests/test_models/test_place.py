@@ -5,8 +5,10 @@ this defines the test suite for the Place class.
 import unittest
 import os
 import models
+import json
 from models.place import Place
 from datetime import datetime
+
 
 
 class TestPlaceInstantiation(unittest.TestCase):

@@ -8,7 +8,7 @@ import models
 from datetime import datetime
 from models.amenity import Amenity
 from time import sleep
-
+import json
 
 class TestAmenityInstantiation(unittest.TestCase):
     """

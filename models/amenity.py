@@ -1,17 +1,14 @@
 #!/usr/bin/python3
-"""
-Module for our Amenity class
-"""
-
+'''class that is inherent of our BaseModel'''
 from models.base_model import BaseModel
 
-class Amenity(BaseModel):
-    """
-    Amenity class that inherits from our BaseModel
 
-    Attributes:
-    name (str): The name of the amenity.
-    """
+class Amenity(BaseModel):
+    '''class of the amenity'''
 
     name = ""
+
+    def __init__(self, *args, **kwargs):
+        '''init for Amenity'''
+        super().__init__(*args, **kwargs)
 

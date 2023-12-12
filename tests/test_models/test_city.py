@@ -9,6 +9,7 @@ import models
 from models.city import City
 from datetime import datetime
 import time
+import json
 
 
 class TestCityInstantiation(unittest.TestCase):

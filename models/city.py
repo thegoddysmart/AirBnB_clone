@@ -1,19 +1,16 @@
 #!/usr/bin/python3
-"""
-Module for our City class
-"""
-
+'''class which is inherent of BaseModel'''
 from models.base_model import BaseModel
 
-class City(BaseModel):
-    """
-    City class that inherits from our BaseModel
 
-    Attributes:
-    state_id (str): The state id.
-    name (str): The name of the city.
-    """
+class City(BaseModel):
+    '''class of city'''
 
     state_id = ""
     name = ""
+
+
+    def __init__(self, *args, **kwargs):
+        '''initializes for the City'''
+        super().__init__(*args, **kwargs)
 

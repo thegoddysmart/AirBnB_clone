@@ -5,6 +5,7 @@ this defines the test suite for the State class.
 import unittest
 import os
 import models
+import json
 from models.state import State
 from datetime import datetime
 from models.review import Review

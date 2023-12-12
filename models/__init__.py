@@ -1,10 +1,8 @@
 #!/usr/bin/python3
-"""
-This makes the models directory a Python package.
-"""
-
+"""creates our unique FileStorage instance for our application"""
 from models.engine.file_storage import FileStorage
 
+"""our variable storage, instance of FileStorage"""
 storage = FileStorage()
 storage.reload()
 

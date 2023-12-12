@@ -1,10 +1,11 @@
 #!/usr/bin/python3
-"""This is our script defines the User class."""
-
+'''class of our user which inherents from BaseModel'''
 from models.base_model import BaseModel
 
+
 class User(BaseModel):
-    """This represents any User."""
+    '''rep. for our class User'''
+
     email = ""
     password = ""
     first_name = ""

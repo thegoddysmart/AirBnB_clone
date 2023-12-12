@@ -6,6 +6,7 @@ This defines the test suite for the Review class.
 import os
 import models
 import unittest
+import json
 from datetime import datetime
 from models.review import Review
 

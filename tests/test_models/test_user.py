@@ -5,6 +5,7 @@ This defines the test suite for the User class.
 import unittest
 import os
 import models
+import json
 from datetime import datetime
 from models.user import User
 from time import sleep
