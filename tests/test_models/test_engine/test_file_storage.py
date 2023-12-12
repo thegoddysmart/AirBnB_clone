@@ -61,7 +61,6 @@ class TestFileStorageAllMethod(unittest.TestCase):
         objects = self.storage.all()
         self.assertIsInstance(objects, dict)
 
-
 class TestFileStorageNewMethod(unittest.TestCase):
     """
     Test cases for the new() method of FileStorage.
@@ -86,7 +85,6 @@ class TestFileStorageNewMethod(unittest.TestCase):
         self.storage.new(self.model)
         objects = self.storage.all()
         self.assertIn(self.model, objects.values())
-
 
 class TestFileStorageSaveMethod(unittest.TestCase):
     """
