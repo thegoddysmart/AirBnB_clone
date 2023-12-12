@@ -3,8 +3,9 @@
 
 import json
 import cmd
+import models
 from models.base_model import BaseModel
-from models import storage
+from datetime import datetime
 from models import storage
 from models.user import User
 from models.state import State
@@ -16,9 +17,7 @@ import re
 
 
 class HBNBCommand(cmd.Cmd):
-
-    """Class for the command interpreter."""
-
+    """Class for commandline interpreter."""
     prompt = "(hbnb) "
     __classes = [
         "Amenity",

@@ -1,12 +1,17 @@
 #!/usr/bin/python3
-"""This is our script defines the User class."""
-
+"""This script Defines our user class"""
 from models.base_model import BaseModel
 
+
 class User(BaseModel):
-    """This represents any User."""
+    """Class for user
+    Attributes:
+        email: email address
+        password: password for your login
+        first_name: first name
+        last_name: last name
+    """
     email = ""
     password = ""
     first_name = ""
     last_name = ""
-

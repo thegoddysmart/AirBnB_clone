@@ -1,7 +1,8 @@
 #!/usr/bin/python3
-"""file_storage.py module"""
+"""For file_storage.py module"""
 import json
 import os
+import models
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
