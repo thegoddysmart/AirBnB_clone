@@ -39,7 +39,7 @@ class BaseModel:
     def __str__(self):
         """Returns official string representation"""
         claname = type(self).__name__
-        return "[{}] ({}) {}".format(claname, self.id, self.to_dict())
+        return "[{}] ({}) {}".format(claname, self.id, self.__dict__)
 
     def save(self):
         """Updates updated_at attribute with current datetime"""
