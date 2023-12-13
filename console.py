@@ -16,7 +16,7 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = "(hbnb) "
 
-    __classes = [
+    __cclasses = [
         "Amenity",
         "BaseModel",
         "City",
@@ -151,7 +151,7 @@ class HBNBCommand(cmd.Cmd):
                 if key_val not in storage.all():
                     print("** no instance found **")
                 else:
-                    del storage.all()[key_val]
+                    del storage.all()[key]
                     storage.save()
 
     def do_all(self, line):
@@ -160,11 +160,11 @@ class HBNBCommand(cmd.Cmd):
         """
         if line != "":
             words = line.split(' ')
-            if words[0] not in storage.all():
+            if words[0] not in storage.classes():
                 print("** class doesn't exist **")
             else:
                 instances = [str(obj) for key, obj in storage.all().items()
-                             if type(obj).__name__ == words[0]]
+                      if type(obj).__name__ == words[0]]
                 print(instances)
         else:
             all_instances = [str(obj) for key, obj in storage.all().items()]
@@ -201,7 +201,7 @@ class HBNBCommand(cmd.Cmd):
         value = match.group(4)
         if not match:
             print("** class name missing **")
-        elif classname not in storage.all():
+        elif classname not in storage.classes():
             print("** class doesn't exist **")
         elif uid is None:
             print("** instance id missing **")
