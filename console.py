@@ -4,21 +4,18 @@
 import json
 import cmd
 import models
+import re
 from models.base_model import BaseModel
 from datetime import datetime
 from models import storage
-from models.user import User
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
-import re
 
 
 class HBNBCommand(cmd.Cmd):
-    """Class for commandline interpreter."""
+    """
+    Class for command-line interpreter.
+    """
     prompt = "(hbnb) "
+
     __classes = [
         "Amenity",
         "BaseModel",
@@ -30,8 +27,9 @@ class HBNBCommand(cmd.Cmd):
     ]
 
     def _precmd(self, line):
-        """Intercepting commands to test for class.syntax()"""
-        # print("PRECMD:::", line)
+        """
+        Intercepting commands to test for class.syntax()
+        """
         match = re.search(r"^(\w*)\.(\w+)(?:\(([^)]*)\))$", line)
         if not match:
             return line
@@ -62,9 +60,11 @@ class HBNBCommand(cmd.Cmd):
         return command
 
     def update_dict(self, classname, uid, s_dict):
-        """For the Helper module for update() with dictionary"""
+        """
+        For the Helper module for update() with dictionary
+        """
         s = s_dict.replace("'", '"')
-        d = json.loads(s)
+        data = json.loads(s)
         if not classname:
             print("** class name missing **")
         elif classname not in storage.classes():
@@ -77,42 +77,47 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
             else:
                 attributes = storage.attributes()[classname]
-                for attribute, value in d.items():
+                for attribute, value in data.items():
                     if attribute in attributes:
                         value = attributes[attribute](value)
                     setattr(storage.all()[key], attribute, value)
                 storage.all()[key].save()
 
     def do_EOF(self, line):
-        """Handles EOF char,
+        """
+        Handles EOF character
         """
         print()
         return True
 
     def do_quit(self, line):
-        """Exits the program console,
+        """
+        Exits the console.
         """
         return True
 
     def emptyline(self):
-        """Doesn't Execute on ENTER.
+        """
+        Doesn't execute on ENTER.
         """
         pass
 
     def do_create(self, line):
-        """For Creating instance,
+        """
+        Creates instance of class.
         """
         if line == "" or line is None:
             print("** class name missing **")
-        elif line not in storage.all():
+        elif line not in storage.classes():
             print("** class doesn't exist **")
         else:
-            b = storage.all()[line]()
-            b.save()
-            print(b.id)
+            instance = storage.classes()[line]()
+            instance.save()
+            print(instance.id)
 
     def do_show(self, line):
-        """Prints string rep of instance.
+        """
+        Prints the str rep of an instance.
         """
         if line == "" or line is None:
             print("** class name missing **")
@@ -130,7 +135,8 @@ class HBNBCommand(cmd.Cmd):
                     print(storage.all()[key])
 
     def do_destroy(self, line):
-        """removes instance based on the class name, id
+        """
+        Removes instance based on the class name and its id
         """
         if line == "" or line is None:
             print("** class name missing **")
@@ -141,35 +147,37 @@ class HBNBCommand(cmd.Cmd):
             elif len(words) < 2:
                 print("** instance id missing **")
             else:
-                key = "{}.{}".format(words[0], words[1])
-                if key not in storage.all():
+                key_val = "{}.{}".format(words[0], words[1])
+                if key_val not in storage.all():
                     print("** no instance found **")
                 else:
-                    del storage.all()[key]
+                    del storage.all()[key_val]
                     storage.save()
 
     def do_all(self, line):
-        """Prints string rep. of our instances.
+        """
+        Prints str rep. of our instances.
         """
         if line != "":
             words = line.split(' ')
             if words[0] not in storage.all():
                 print("** class doesn't exist **")
             else:
-                nl = [str(obj) for key, obj in storage.all().items()
-                      if type(obj).__name__ == words[0]]
-                print(nl)
+                instances = [str(obj) for key, obj in storage.all().items()
+                             if type(obj).__name__ == words[0]]
+                print(instances)
         else:
-            new_list = [str(obj) for key, obj in storage.all().items()]
-            print(new_list)
+            all_instances = [str(obj) for key, obj in storage.all().items()]
+            print(all_instances)
 
     def do_count(self, line):
-        """Counts instances of our class.
+        """
+        Counts instances of a class.
         """
         words = line.split(' ')
         if not words[0]:
             print("** class name missing **")
-        elif words[0] not in storage.all():
+        elif words[0] not in storage.classes():
             print("** class doesn't exist **")
         else:
             matches = [
@@ -178,7 +186,8 @@ class HBNBCommand(cmd.Cmd):
             print(len(matches))
 
     def do_update(self, line):
-        """Updates instance by adding, updating attribute,
+        """
+        Updates instance by adding, updating attribute,
         """
         if line == "" or line is None:
             print("** class name missing **")
@@ -225,8 +234,7 @@ class HBNBCommand(cmd.Cmd):
                 storage.all()[key].save()
 
     def default(self, line):
-        """with holds commands if nothing else matches it,"""
-        # print("DEF:::", line)
+        """Withholds commands if nothing else matches it"""
         self._precmd(line)
 
 
